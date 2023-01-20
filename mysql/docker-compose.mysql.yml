@@ -13,10 +13,8 @@ services:
     image: mariadb:latest
     env_file:
       - mysql.env
-    expose:
-        - "4000"
     ports:
-        - "4000:3306"
+        - "3306:3306"
     volumes:
      - mariadb:/var/lib/mysql
     networks:
@@ -25,8 +23,6 @@ services:
   phpmyadmin:
     image: phpmyadmin
     restart: always
-    expose:
-      - "8081"
     ports:
       - "8081:80"
     environment:

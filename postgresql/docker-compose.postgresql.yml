@@ -2,11 +2,30 @@ version: '3.9'
 
 volumes:
   database-data:
+    driver: local
+
+networks:
+    posql-network:
 
 services:
   postgresql:
+    container_name: postgresql
     image: postgres:latest
     env_file:
-      - .env
+      - postgresql.env
     volumes:
       - database-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    networks:
+      - posql-network
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    env_file:
+      - pgadmin.env
+    ports: 
+      - "5050:80"
+    networks:
+      - posql-network
