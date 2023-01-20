@@ -1,0 +1,12 @@
+version: '3.9'
+
+volumes:
+  database-data:
+
+services:
+  postgresql:
+    image: postgres:latest
+    env_file:
+      - .env
+    volumes:
+      - database-data:/var/lib/postgresql/data/
