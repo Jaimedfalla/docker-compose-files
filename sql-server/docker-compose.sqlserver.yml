@@ -1,0 +1,23 @@
+version: '3.9'
+
+networks:
+  default:
+
+volumes:
+  sql_data:
+    name: sql_data
+
+services:
+  SQLServer:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: local-db
+    user: "0:0"
+    env_file:
+      - sql-server.env
+    ports:
+      - 1433:1433
+    volumes:
+      - sql_data:/var/opt/mssql
+      - $HOME/DDBB:/tmp/DDBB
+    networks:
+      - default
