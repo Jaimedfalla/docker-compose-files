@@ -4,12 +4,11 @@ networks:
   default:
 
 volumes:
-  sql_data:
-    name: sql_data
+  dbdata:
 
 services:
   SQLServer:
-    image: mcr.microsoft.com/mssql/server:latest
+    image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: local-db
     user: "0:0"
     env_file:
@@ -17,7 +16,6 @@ services:
     ports:
       - 1433:1433
     volumes:
-      - sql_data:/var/opt/mssql
-      - $HOME/DDBB:/tmp/DDBB
+      - dbdata:/var/opt/mssql/data
     networks:
       - default
